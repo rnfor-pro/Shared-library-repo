@@ -13,11 +13,12 @@ pipeline{
         }
     }
 
-    stage('git-clone'){
-      steps{
-         checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'githubpassword', url: 'https://github.com/rnfor-pro/module2_ci']]])
-      }
-    }
+  stage("Checkout Code") {
+               steps {
+                   git branch: 'master',
+                       url: "${repoUrl}"
+               }
+           }
     stage('etech-hello'){
       steps{
         sh 'git version'
